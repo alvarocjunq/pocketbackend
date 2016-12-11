@@ -12,16 +12,6 @@ var tokenController = require('./controller/tokenController.js');
 
 var app = express();
 
-var db;
-
-var cloudant;
-
-var fileToUpload;
-
-var dbCredentials = {
-    dbName: 'my_sample_db'
-};
-
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var logger = require('morgan');
@@ -52,10 +42,10 @@ app.get('/', routes.index);
 
 
 app.get('/api/token/:id', function(request, response) {
-    var terceiro = request.query.id;
+    var terceiro = request.param('id');
     
-	tokenController.user(id, function(resp) {
-		res.json(resp);
+	tokenController.user(terceiro, function(resp) {
+		response.json(resp);
 	});
 });
 
